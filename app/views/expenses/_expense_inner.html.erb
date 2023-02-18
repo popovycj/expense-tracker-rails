@@ -1,0 +1,14 @@
+<td><%= expense.description %></td>
+<td><%= number_to_currency(expense.amount) %></td>
+<td><%= expense.category.name %></td>
+<td><%= expense.visibility.capitalize %></td>
+<td><%= expense.created_at.strftime("%B %d, %Y") %></td>
+<td class="d-flex gap-1">
+  <%= button_to edit_expense_path(expense), method: :get, data: { turbo_frame: "modal" }, class: "btn btn-success" do %>
+    <i class="bi bi-pen"></i>
+  <% end %>
+
+  <%= button_to expense_path(expense), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" do %>
+    <i class="bi bi-trash"></i>
+  <% end %>
+</td>

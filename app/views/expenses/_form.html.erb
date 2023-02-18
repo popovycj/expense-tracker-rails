@@ -1,0 +1,9 @@
+<%= simple_form_for expense do |f| %>
+  <%= f.input :category, collection: Category.all, selected: Category.first.id, input_html: { name: "expense[category_id]" } %>
+  <%= f.input :description %>
+  <%= f.input :amount %>
+  <%= f.input :visibility, collection: Expense.visibilities.keys, selected: Expense.visibilities.keys.first %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= f.input :additional_param1, as: :hidden, input_html: { value: "value1" } %>
+  <%= f.input :additional_param2, as: :hidden, input_html: { value: "value2" } %>
+<% end %>
