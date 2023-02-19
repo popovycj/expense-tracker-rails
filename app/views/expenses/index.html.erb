@@ -5,6 +5,6 @@
   <%= button_to "Add new expense", new_expense_path, method: :get, data: { turbo_frame: "modal" } %>
 </div>
 
-<%= render 'filters' %>
+<%= render 'shared/filters', url: expenses_path %>
 
 <%= render 'expenses_table', expenses: @expenses %>

@@ -1,5 +1,5 @@
 <div class="filters">
-  <%= form_with url: expenses_path, method: :get, local: true, data: { turbo_frame: "expenses_table" } do |f| %>
+  <%= form_with url: url, method: :get, local: true, data: { turbo_frame: "expenses_table" } do |f| %>
     <div class="form-group">
       <%= f.label :category_id, "Category" %>
       <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Select category" }, class: "form-control" %>
