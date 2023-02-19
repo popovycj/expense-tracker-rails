@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import AutohideController from "./autohide_controller"
+application.register("autohide", AutohideController)
+
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
+import NewExpensesTrackerController from "./new_expenses_tracker_controller"
+application.register("new-expenses-tracker", NewExpensesTrackerController)

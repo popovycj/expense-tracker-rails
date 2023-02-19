@@ -1,0 +1,10 @@
+<%= turbo_frame_tag :modal %>
+
+<div class="d-flex justify-between-center">
+  <h1 class="col">Expenses</h1>
+  <%= button_to "Add new expense", new_expense_path, method: :get, data: { turbo_frame: "modal" } %>
+</div>
+
+<%= render 'shared/filters', url: expenses_path %>
+
+<%= render 'expenses_table', expenses: @expenses %>

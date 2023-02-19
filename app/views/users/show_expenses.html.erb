@@ -1,0 +1,48 @@
+<%= turbo_frame_tag :modal %>
+
+<% if current_user == @user %>
+  <h1>Your public profile</h1>
+<% else %>
+  <h1>User Profile</h1>
+<% end %>
+
+<p>Email: <%= @user.email %></p>
+
+<%= render 'shared/filters', url: show_expenses_user_path(@user) %>
+
+<h2 class="text-center">Public Expenses</h2>
+
+<%= turbo_frame_tag :expenses_table, data: { turbo_action: "advance" } do %>
+  <% if @expenses.empty? %>
+    <p class="text-center">No public expenses found.</p>
+  <% else %>
+    <p class="text-center" id="total_expenses">
+      <strong>Total expenses: <%= number_to_currency(@expenses.sum(:amount)) %></strong>
+    </p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @expenses.each do |expense| %>
+          <tr>
+            <td>
+              <%= truncate(expense.description, length: 25) do %>
+                <%= link_to 'Read more', expense_path(expense), data: { turbo_frame: "modal" } %>
+              <% end %>
+            </td>
+            <td><%= number_to_currency(expense.amount) %></td>
+            <td><%= expense.category.name %></td>
+            <td><%= expense.created_at.strftime("%B %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

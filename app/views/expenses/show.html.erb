@@ -1,0 +1,21 @@
+<%= turbo_frame_tag :modal do %>
+  <div class="modal fade" data-controller="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Details of expense</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="mb-3">Expense Details</h1>
+
+          <p><strong>Amount:</strong> <%= number_to_currency(@expense.amount) %></p>
+          <p><strong>Description:</strong> <%= @expense.description %></p>
+          <p><strong>Category:</strong> <%= @expense.category.name %></p>
+          <p><strong>Date:</strong> <%= @expense.created_at.strftime("%B %d, %Y") %></p>
+          <p><strong>Visibility:</strong> <%= @expense.visibility.humanize %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
