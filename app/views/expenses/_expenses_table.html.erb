@@ -1,25 +1,25 @@
 <%= turbo_frame_tag :expenses_table, data: { turbo_action: "advance" } do %>
-  <% if expenses.empty? %>
-    <p class="text-center">No expenses found.</p>
-  <% else %>
-    <p class="text-center" id="total_expenses">
+  <p class="text-center" id="total_expenses">
+    <% if expenses.empty? %>
+      <span>No expenses found.</span>
+    <% else %>
       <strong>Total expenses: <%= number_to_currency(expenses.sum(:amount)) %></strong>
-    </p>
+    <% end %>
+  </p>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>Category</th>
-          <th>Visibility</th>
-          <th>Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="expenses" data-controller="new-expenses-tracker">
-        <%= render 'expenses', expenses: expenses %>
-      </tbody>
-    </table>
-  <% end %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Visibility</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="expenses" data-controller="new-expenses-tracker">
+      <%= render 'expenses', expenses: expenses %>
+    </tbody>
+  </table>
 <% end %>
