@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @users = User.order(created_at: :desc)
   end
 
-  def show
+  def show_expenses
     @user = User.find_by(id: params[:id])
 
     @expenses = @user.expenses.public_expenses

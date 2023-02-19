@@ -14,7 +14,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.id %></td>
-        <td><%= link_to user.email, user_path(user) %></td>
+        <td><%= link_to user.email, show_expenses_user_path(user) %></td>
         <td><%= user.expenses.public_expenses.count %></td>
         <td><%= number_to_currency(user.expenses.public_expenses.sum(:amount)) %></td>
         <td><%= number_to_currency(user.expenses.public_expenses.last_month_expenses.sum(:amount)) %></td>

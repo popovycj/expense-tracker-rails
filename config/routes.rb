@@ -7,5 +7,9 @@ Rails.application.routes.draw do
 
   resources :expenses
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index] do
+    member do
+      get :show_expenses
+    end
+  end
 end
