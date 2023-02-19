@@ -2,6 +2,7 @@
   <%= f.input :category, collection: Category.all, selected: Category.first.id, input_html: { name: "expense[category_id]" } %>
   <%= f.input :description %>
   <%= f.input :amount %>
+  <%= f.input :created_at, as: :date, html5: true %>
   <%= f.input :visibility, collection: Expense.visibilities.keys, selected: Expense.visibilities.keys.first %>
   <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>
