@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AutohideController from "./autohide_controller"
+application.register("autohide", AutohideController)
+
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 

@@ -15,6 +15,10 @@
   <body>
     <%= render 'layouts/navbar' %>
 
+    <div id="flash">
+      <%= render partial: "layouts/flash" %>
+    </div>
+
     <div class="container mt-4">
       <%= yield %>
     </div>

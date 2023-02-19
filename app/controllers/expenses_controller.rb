@@ -19,13 +19,16 @@ class ExpensesController < ApplicationController
     @expense = current_user.expenses.build(expense_params)
 
     if @expense.save
+      flash.now[:success] = "Expense was created"
+
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.prepend('expenses',
                                   partial: 'expenses/expense',
                                   locals: { expense: @expense }),
-            turbo_stream.update('total_expenses', "Need to be clarified")
+            turbo_stream.update('total_expenses', "Need to be clarified"),
+            turbo_stream.prepend("flash", partial: "layouts/flash")
           ]
         end
       end
@@ -40,7 +43,7 @@ class ExpensesController < ApplicationController
   def update
     respond_to do |format|
       if @expense.update(expense_params)
-        # flash.now[:success] = "Expense was updated"
+        flash.now[:success] = "Expense was updated"
 
         format.turbo_stream do
           render turbo_stream: [
@@ -48,7 +51,7 @@ class ExpensesController < ApplicationController
                                 partial: "expenses/expense_inner",
                                 locals: {expense: @expense}),
             turbo_stream.update('total_expenses', "Need to be clarified"),
-            # turbo_stream.prepend("flash", partial: "layouts/flash")
+            turbo_stream.prepend("flash", partial: "layouts/flash")
           ]
         end
       else
@@ -59,14 +62,14 @@ class ExpensesController < ApplicationController
 
   def destroy
     @expense.destroy
-    # flash.now[:success] = "Expense was deleted"
+    flash.now[:success] = "Expense was deleted"
 
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.remove(@expense),
           turbo_stream.update('total_expenses', "Need to be clarified"),
-          # turbo_stream.prepend("flash", partial: "layouts/flash")
+          turbo_stream.prepend("flash", partial: "layouts/flash")
         ]
       end
     end
