@@ -1,4 +1,8 @@
-<td><%= expense.description %></td>
+<td>
+  <%= truncate(expense.description, length: 25) do %>
+    <%= link_to 'Read more', expense_path(expense), data: { turbo_frame: "modal" } %>
+  <% end %>
+</td>
 <td><%= number_to_currency(expense.amount) %></td>
 <td><%= expense.category.name %></td>
 <td><%= expense.visibility.capitalize %></td>

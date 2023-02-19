@@ -8,6 +8,9 @@ class ExpensesController < ApplicationController
     @expenses = @expenses.where(created_at: params[:start_date]..params[:end_date]) if params[:start_date].present? && params[:end_date].present?
   end
 
+  def show
+  end
+
   def new
     @expense = current_user.expenses.build
   end
@@ -18,9 +21,12 @@ class ExpensesController < ApplicationController
     if @expense.save
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.prepend('expenses',
-                                                    partial: 'expenses/expense',
-                                                    locals: { expense: @expense })
+          render turbo_stream: [
+            turbo_stream.prepend('expenses',
+                                  partial: 'expenses/expense',
+                                  locals: { expense: @expense }),
+            turbo_stream.update('total_expenses', "Need to be clarified")
+          ]
         end
       end
     else
