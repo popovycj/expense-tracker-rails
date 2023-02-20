@@ -90,5 +90,4 @@ test:
 production:
   <<: *default
   database: expense_tracker_rails_production
-  username: expense_tracker_rails
-  password: <%= ENV["EXPENSE_TRACKER_RAILS_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
