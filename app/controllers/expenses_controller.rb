@@ -41,10 +41,10 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @expense.update(expense_params)
-        flash.now[:success] = "Expense was updated"
+    if @expense.update(expense_params)
+      flash.now[:success] = "Expense was updated"
 
+      respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update(@expense,
@@ -54,9 +54,9 @@ class ExpensesController < ApplicationController
             turbo_stream.prepend("flash", partial: "layouts/flash")
           ]
         end
-      else
-        render :edit
       end
+    else
+      render :edit
     end
   end
 
