@@ -3,7 +3,7 @@ FactoryBot.define do
     amount { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
     description { Faker::Lorem.sentence }
     visibility { :public }
-    user
-    category
+    association :user
+    association :category
   end
 end

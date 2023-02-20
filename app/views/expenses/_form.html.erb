@@ -1,5 +1,5 @@
 <%= simple_form_for expense do |f| %>
-  <%= f.input :category, collection: Category.all, selected: Category.first.id, input_html: { name: "expense[category_id]" } %>
+  <%= f.input :category, collection: Category.all, selected: Category.first&.id || 0, input_html: { name: "expense[category_id]" } %>
   <%= f.input :description %>
   <%= f.input :amount %>
   <%= f.input :created_at, as: :date, html5: true %>
